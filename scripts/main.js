@@ -38,12 +38,12 @@
 			this.contacts_list.append(view.render().el);
 		},
 
-		createView : function(){
-			var _this = this;
-/*			_.each(this.collection.models, function(item){
-				_this.renderContact(item)
-			}, this);
-*/		},
+		createView : function(data){
+			position = this.collection.indexOf(data)+1;
+			data.set("position", position)
+			var contactView = new PersonView({model: data});
+			this.contacts_list.append(contactView.render().el)
+		},
 	});
 
 	var PersonModel = Backbone.Model.extend({
@@ -52,7 +52,7 @@
 			'number': '-',
 			'username': '-'
 		},
-		initialize: function(contactData){			
+		initialize: function(){			
 		},
 		idAttribute : "_id"
 	});
@@ -86,16 +86,6 @@
 			return this;
 		}
 	});
-
-	var CreateView = Backbone.View.extend({
-		tagName : 'tr',
-		template: $('#contact_template').html(),
-		render: function() {
-/*			var compiledTemplate = _.template(this.template);
-			this.$el.html(compiledTemplate(this.model.toJSON()))
-			return this;
-*/		}
-	})
 
 	var contactApp = new App({collection: new PersonCollection()});
 
