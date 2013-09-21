@@ -35,7 +35,6 @@
 			
 			var view = new PersonView({model: person});
 
-			this.contacts_list.append(view.render().el);
 		},
 
 		createView : function(data){
